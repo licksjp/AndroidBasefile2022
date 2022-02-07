@@ -1,0 +1,17 @@
+<resources>
+    <!--ボタン配列-->
+    <string name="app_name">Basefile</string>
+    <string name="Button_9">9</string>
+    <string name="Button_8">8</string>
+    <string name="Button_7">7</string>
+    <string name="Button_6">6</string>
+    <string name="Button_5">5</string>
+    <string name="Button_4">4</string>
+    <string name="Button_3">3</string>
+    <string name="Button_2">2</string>
+    <string name="Button_1">1</string>
+    <string name="Button_Clear">クリア</string>
+    <string name="Button_0">0</string>
+    <string name="Button_EXE">入 力</string>
+    <!--ボタン配列-->
+</resources>
