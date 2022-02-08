@@ -1,6 +1,10 @@
 <resources>
-    <!--ボタン配列-->
     <string name="app_name">Basefile</string>
+    <string name="TopMessage">入力ボタンを押してください</string>
+    <string name="TopMenu_NoSelect"></string>
+    <string name="Ready_Message">準備ができました。</string>
+    <!--ボタン配列-->
+
     <string name="Button_9">9</string>
     <string name="Button_8">8</string>
     <string name="Button_7">7</string>
