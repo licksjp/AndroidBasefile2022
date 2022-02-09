@@ -11,18 +11,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
-
+import android.app.AlertDialog
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     var No = 0
     var VIBRATION_ON = 1
+    var mode=0
+    var flag=0
+
     private var textToSpeech: TextToSpeech? = null
     private val tts: TextToSpeech? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         textToSpeech = TextToSpeech(this, this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var text = R.string.Ready_Message.toString()
-        SpeechText(text)
+        var text = getString(R.string.Ready_Message)
+        //SpeechText(getString("テスト".toString()))
         // ボタンを設定
         // ボタンを設定
         var Screenview: TextView = findViewById<TextView>(R.id.view_screen) as TextView
@@ -53,15 +56,65 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
 
         Button1.setOnClickListener {
             Vibration()
-            Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
+            No=1
+            when(mode)
+            {
+                1->{
+                    flag=1
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.TopMenu_Select1,No))
+                }
+                4->{
+                    flag=4
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.Help_Select1,No))
+                }
+                // val messageView: TextView = findViewById(R.id.view_screen)
+                // messageView.text = (getString(R.string.TopMenu_NoSelect))
+                // String.format(R.string.TopMenu_NoSelect,No)
+
+            }
+            //Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
         }
         Button2.setOnClickListener {
             Vibration()
-            Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
+            No=2
+            when(mode)
+            {
+                1->{
+                    flag=1
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.TopMenu_Select2,No))
+                }
+                4->{
+                    flag=5
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.Help_Select2,No))
+                }
+                // val messageView: TextView = findViewById(R.id.view_screen)
+                // messageView.text = (getString(R.string.TopMenu_NoSelect))
+                // String.format(R.string.TopMenu_NoSelect,No)
+
+            }
+            //Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
         }
         Button3.setOnClickListener {
             Vibration()
-            Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
+            No=3
+            when(mode)
+            {
+                1->{
+                    flag=3
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.TopMenu_Select3,No))
+                }
+
+                // val messageView: TextView = findViewById(R.id.view_screen)
+                // messageView.text = (getString(R.string.TopMenu_NoSelect))
+                // String.format(R.string.TopMenu_NoSelect,No)
+
+            }
+            //Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
         }
         Button4.setOnClickListener {
             Vibration()
@@ -89,11 +142,66 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         }
         Button_Clear.setOnClickListener {
             Vibration()
-            Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
+            flag=0
+            mode=0
+            No=0
+            val messageView: TextView = findViewById(R.id.view_screen)
+            messageView.text = (getString(R.string.TopMessage))
+
+            Toast.makeText(this,R.string.AllClearMessage, Toast.LENGTH_SHORT).show()
         }
         Button_EXE.setOnClickListener {
             Vibration()
-            Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
+            No=0
+            when(flag)
+            {
+                0->{
+                    mode=1
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                     messageView.text = (getString(R.string.TopMenu_NoSelect,No))
+                }
+                1->{
+                    /*トップ画面
+                       select1 トップ画面のコンテンツ
+                     */
+                    mode=2
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.TopMenu_NoSelect,No))
+
+                }
+                    2->{
+                    /*トップ画面
+                       select2 設定のコンテンツ
+                     */
+                    mode=3
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.TopMenu_NoSelect,No))
+
+                }
+                3->{
+                    /*トップ画面
+                       select3 Helpのコンテンツ
+                     */
+                    mode=4
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.Help_NoSelect,No))
+
+                }
+                4->{
+                    /*トップ画面
+                       select3 Helpのコンテンツ Version Dialog
+                     */
+                    VersionDialog()
+                }
+                5->{
+                    ReferenceBookDialog()
+                }
+                // val messageView: TextView = findViewById(R.id.view_screen)
+                   // messageView.text = (getString(R.string.TopMenu_NoSelect))
+               // String.format(R.string.TopMenu_NoSelect,No)
+
+            }
+            //Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
         }
         Button0.setOnClickListener {
             Vibration()
@@ -131,12 +239,13 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             Log.d("tts","TextToSpeech初期化成功")
-            var text = R.string.Ready_Message.toString()
-            SpeechText(text)
+           // var text = getString(R.string.Ready_Message)
+           // SpeechText(text)
             val listener = object : UtteranceProgressListener(){
                 var tag : String = "TTS"
                 override fun onDone(utteranceId: String?) {
                     Log.d(tag,"音声再生が完了しました。")
+
                 }
                 override fun onError(utteranceId: String?) {
                     Log.d(tag,"音声再生中にエラーが発生しました。")
@@ -163,12 +272,39 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
             Log.d("tts","TextToSpeech初期化失敗")
         }
     }
-
+/*
     private fun SpeechText(text:String){
         tts?.setLanguage(Locale.JAPANESE)
         tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"ID")
     }
+*/
+    private fun startSpeak(text: String, isImmediately: Boolean) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "utteranceId")
+        }
+    }
+//Version Dialog
+    fun VersionDialog()
+{
+    AlertDialog.Builder(this)
+        .setTitle(R.string.VersionTitle)
+        .setMessage(R.string.VersionSentense)
+        .setPositiveButton(R.string.Ok) { dialog, which -> }
+        .show()
 
 
+    //return builder.create()
+    }
+//参考文献
+fun ReferenceBookDialog()
+{
+    AlertDialog.Builder(this)
+        .setTitle(R.string.ReferenceBookTitle)
+        .setMessage(R.string.ReferenceBookSentense)
+        .setPositiveButton(R.string.Ok) { dialog, which -> }
+        .show()
 
+
+    //return builder.create()
+}
 }
