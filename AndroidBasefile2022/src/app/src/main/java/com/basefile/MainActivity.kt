@@ -1,5 +1,6 @@
 package com.basefile
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.os.Vibrator
@@ -10,48 +11,45 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.ActionBar
 import java.util.*
-import android.app.AlertDialog
-class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
+
+class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     var No = 0
     var VIBRATION_ON = 1
     var mode=0
     var flag=0
-
+  //  private lateinit var mediaPlayer: MediaPlayer
+ //   private val myContext: Context = context
     private var textToSpeech: TextToSpeech? = null
     private val tts: TextToSpeech? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        //setHasOptionsMenu(true)
         textToSpeech = TextToSpeech(this, this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //val actionBar: ActionBar? = supportActionBar
+        //if (actionBar != null) {
+          //  actionBar.setTitle("テキスト")
+        //}
         var text = getString(R.string.Ready_Message)
         //SpeechText(getString("テスト".toString()))
         // ボタンを設定
         // ボタンを設定
         var Screenview: TextView = findViewById<TextView>(R.id.view_screen) as TextView
-        val Button1: Button = findViewById<Button>(R.id.button_1) as Button
 
-        val Button2: Button = findViewById<Button>(R.id.button_2) as Button
-
-        val Button3: Button = findViewById<Button>(R.id.button_3) as Button
-
-        val Button4: Button = findViewById<Button>(R.id.button_4) as Button
-
-        val Button5: Button = findViewById<Button>(R.id.button_5) as Button
-
-        val Button6: Button = findViewById<Button>(R.id.button_6) as Button
-
-        val Button7: Button = findViewById<Button>(R.id.button_7) as Button
-
-        val Button8: Button = findViewById<Button>(R.id.button_8) as Button
-
-        val Button9: Button = findViewById<Button>(R.id.button_9) as Button
-
-        val Button_Clear: Button = findViewById<Button>(R.id.button_Clear) as Button
-
-        val Button0: Button = findViewById<Button>(R.id.button_0) as Button
-
-        val Button_EXE: Button = findViewById<Button>(R.id.button_EXE) as Button
+        val Button1: Button = findViewById(R.id.button_1)
+        val Button2: Button = findViewById(R.id.button_2)
+        val Button3: Button = findViewById(R.id.button_3)
+        val Button4: Button = findViewById(R.id.button_4)
+        val Button5: Button = findViewById(R.id.button_5)
+        val Button6: Button = findViewById(R.id.button_6)
+        val Button7: Button = findViewById(R.id.button_7)
+        val Button8: Button = findViewById(R.id.button_8)
+        val Button9: Button = findViewById(R.id.button_9)
+        val Button0: Button = findViewById(R.id.button_0)
+        val Button_Clear: Button = findViewById(R.id.button_Clear)
+        val Button_EXE: Button = findViewById(R.id.button_EXE)
 
 
         Button1.setOnClickListener {
@@ -136,6 +134,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
             Vibration()
             Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
         }
+
         Button9.setOnClickListener {
             Vibration()
             Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
@@ -156,9 +155,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
             when(flag)
             {
                 0->{
+                    SpeechText("準備できました")
                     mode=1
-                    val messageView: TextView = findViewById(R.id.view_screen)
-                     messageView.text = (getString(R.string.TopMenu_NoSelect,No))
+                    val Screenview: TextView = findViewById(R.id.view_screen)
+                   // Screenview.setTextSize(8.0f)
+                    Screenview.text = (getString(R.string.TopMenu_NoSelect,No))
                 }
                 1->{
                     /*トップ画面
@@ -166,6 +167,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
                      */
                     mode=2
                     val messageView: TextView = findViewById(R.id.view_screen)
+                    //messageView.setTextSize(48.0f)
+                    //messageView.setTextSize(32.0f)
                     messageView.text = (getString(R.string.TopMenu_NoSelect,No))
 
                 }
@@ -211,7 +214,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
 
     }
 
-
+    //verride fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+       // inflater.inflate(R.menu.sample_menu, menu)
+    //}
 
     fun Vibration() {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -226,6 +231,23 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.cancel()
     }
+    /*mp3 再生*/
+    /*
+    fun playsound(BGM file)
+    {
+        mediaPlayer = MediaPlayer.create(this, file)
+        mediaPlayer.isLooping = true
+        mediaPlayer.start()
+    }
+    */
+    /*
+    fun stopMusic() {
+        mediaPlayer.stop()
+        mediaPlayer.reset()
+        mediaPlayer.release()
+    }
+
+     */
     /*
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onClick(v: View?) {
@@ -236,6 +258,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
     }
 
      */
+    override fun  onResume() {
+        super.onResume()
+        //setVolumeControlStream(AudioManager.STREAM_MUSIC)
+       // var text = "テスト".text.toString()
+    }
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             Log.d("tts","TextToSpeech初期化成功")
@@ -271,6 +298,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener{
         }else{
             Log.d("tts","TextToSpeech初期化失敗")
         }
+    }
+    private fun SpeechText(text:String){
+        tts?.setLanguage(Locale.JAPANESE)
+        tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"ID")
     }
 /*
     private fun SpeechText(text:String){

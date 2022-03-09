@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Basefile</string>
-    <string name="TopMessage">入力ボタンを押してください\n \n \n \n \n \n \n \n \n \n </string>
+    <string name="TopMessage">入力ボタンを押してください</string>
     <string name="AllClearMessage">オールクリアしました</string>
 
     <string name="Ready_Message">準備ができました。</string>
   <!--トップ画面-->
-    <string name="TopMenu_NoSelect">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n\n番号:%d.無選択</string>
-    <string name="TopMenu_Select1">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n\n番号:%d.トップ画面</string>
-    <string name="TopMenu_Select2">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n\n番号:%d.設定</string>
-    <string name="TopMenu_Select3">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n\n番号:%d.ヘルプ</string>
+    <string name="TopMenu_NoSelect">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.無選択</string>
+    <string name="TopMenu_Select1">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.トップ画面</string>
+    <string name="TopMenu_Select2">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.設定</string>
+    <string name="TopMenu_Select3">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.ヘルプ</string>
 <!--2.設定-->
     <!--3.Help-->
     <string name="Help_NoSelect">Help\n1.バージョン\n2.参考文献\n\n\n\n\n\n\n番号:%d.無選択</string>
