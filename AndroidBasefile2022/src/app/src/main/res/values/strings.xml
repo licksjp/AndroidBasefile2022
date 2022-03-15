@@ -5,15 +5,22 @@
 
     <string name="Ready_Message">準備ができました。</string>
   <!--トップ画面-->
-    <string name="TopMenu_NoSelect">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.無選択</string>
-    <string name="TopMenu_Select1">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.トップ画面</string>
-    <string name="TopMenu_Select2">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.設定</string>
-    <string name="TopMenu_Select3">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n番号:%d.ヘルプ</string>
-<!--2.設定-->
+    <string name="TopMenu_NoSelect">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n番号:%d.無選択</string>
+    <string name="TopMenu_Select1">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n番号:%d.トップ画面</string>
+    <string name="TopMenu_Select2">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n番号:%d.設定</string>
+    <string name="TopMenu_Select3">メイン画面\n1.トップ画面\n2.設定\n3.ヘルプ\n\n\n\n\n番号:%d.ヘルプ</string>
+　　　<!--2.設定-->
+    <string name="Setting_NoSelect">設定\n1.バイブの設定\n\n\n\n\n\n\n番号:%d.無選択</string>
+    <string name="Setting_Select1">設定\n1.バイブの設定\n\n\n\n\n\n\n番号:%d.バイブの設定</string>
+    <string name="Setting_Vibration_Title">バイブの設定</string>
+    <string name="Setting_Vibration_List1">バイブオン</string>
+    <string name="Setting_Vibration_List2">バイブオフ</string>
+    <string name="OK">Ok</string>
+
     <!--3.Help-->
-    <string name="Help_NoSelect">Help\n1.バージョン\n2.参考文献\n\n\n\n\n\n\n番号:%d.無選択</string>
-    <string name="Help_Select1">Help\n1.バージョン\n2.参考文献\n\n\n\n\n\n\n番号:%d.バージョン</string>
-    <string name="Help_Select2">Help\n1.バージョン\n2.参考文献\n\n\n\n\n\n\n番号:%d.参考文献</string>
+    <string name="Help_NoSelect">ヘルプ\n1.バージョン\n2.参考文献\n\n\n\n\n\n番号:%d.無選択</string>
+    <string name="Help_Select1">ヘルプ\n1.バージョン\n2.参考文献\n\n\n\n\n\n番号:%d.バージョン</string>
+    <string name="Help_Select2">ヘルプ\n1.バージョン\n2.参考文献\n\n\n\n\n\n番号:%d.参考文献</string>
 <!-- Version Dialog-->
     <string name="VersionTitle">バージョン情報</string>
     <string name="VersionSentense">アプリ名:\nバージョン\nAuthor\nE-mail:licksjp@gmail.com\n(C)Copyrights licksjp All right reserved</string>

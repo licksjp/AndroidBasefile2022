@@ -67,6 +67,13 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                     val messageView: TextView = findViewById(R.id.view_screen)
                     messageView.text = (getString(R.string.Help_Select1,No))
                 }
+                5->{
+                    flag=7
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.Setting_Select1,No))
+
+                }
+
                 // val messageView: TextView = findViewById(R.id.view_screen)
                 // messageView.text = (getString(R.string.TopMenu_NoSelect))
                 // String.format(R.string.TopMenu_NoSelect,No)
@@ -80,7 +87,7 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             when(mode)
             {
                 1->{
-                    flag=1
+                    flag=6
                     val messageView: TextView = findViewById(R.id.view_screen)
                     messageView.text = (getString(R.string.TopMenu_Select2,No))
                 }
@@ -89,7 +96,7 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                     val messageView: TextView = findViewById(R.id.view_screen)
                     messageView.text = (getString(R.string.Help_Select2,No))
                 }
-                // val messageView: TextView = findViewById(R.id.view_screen)
+                  // val messageView: TextView = findViewById(R.id.view_screen)
                 // messageView.text = (getString(R.string.TopMenu_NoSelect))
                 // String.format(R.string.TopMenu_NoSelect,No)
 
@@ -198,6 +205,18 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                 }
                 5->{
                     ReferenceBookDialog()
+                }
+                6->{
+                    /*設定　トップ画面*/
+                    mode=5
+                    val messageView: TextView = findViewById(R.id.view_screen)
+                    messageView.text = (getString(R.string.Setting_NoSelect,No))
+
+
+                }
+                7->{
+                    //バイブの設定　ダイアログ
+                    Setting_Vibration()
                 }
                 // val messageView: TextView = findViewById(R.id.view_screen)
                    // messageView.text = (getString(R.string.TopMenu_NoSelect))
@@ -337,5 +356,20 @@ fun ReferenceBookDialog()
 
 
     //return builder.create()
+}
+//設定　バイブのオンオフ
+fun Setting_Vibration()
+{
+    val strList = arrayOf( getString(R.string.Setting_Vibration_List1), getString(R.string.Setting_Vibration_List2))
+
+    AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+        .setTitle(R.string.Setting_Vibration_Title)
+        .setSingleChoiceItems(strList, 0, { dialog, which ->
+            // TODO:アイテム選択時の挙動
+        })
+        .setPositiveButton(getString(R.string.Ok), { dialog, which ->
+            // TODO:Yesが押された時の挙動
+        })
+        .show()
 }
 }
