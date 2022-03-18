@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             when(mode)
             {
                 1->{
-                    flag=1
+                    flag=8
                     val messageView: TextView = findViewById(R.id.view_screen)
                     messageView.text = (getString(R.string.TopMenu_Select1,No))
                 }
-                4->{
+                  4->{
                     flag=4
                     val messageView: TextView = findViewById(R.id.view_screen)
                     messageView.text = (getString(R.string.Help_Select1,No))
@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                     val messageView: TextView = findViewById(R.id.view_screen)
                     messageView.text = (getString(R.string.Setting_Select1,No))
 
+                }
+                6->{
+                    flag=8
+                    Input_moji()
                 }
 
                 // val messageView: TextView = findViewById(R.id.view_screen)
@@ -218,6 +222,10 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
                     //バイブの設定　ダイアログ
                     Setting_Vibration()
                 }
+                8->{
+                    //mode=6
+                    Input_moji()
+                }
                 // val messageView: TextView = findViewById(R.id.view_screen)
                    // messageView.text = (getString(R.string.TopMenu_NoSelect))
                // String.format(R.string.TopMenu_NoSelect,No)
@@ -333,7 +341,47 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "utteranceId")
         }
     }
-//Version Dialog
+    //Edit Dialog
+    fun Input_moji() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = this.layoutInflater
+        val signinView = inflater.inflate(R.layout.dialog, null)
+
+        builder.setView(signinView)
+            .setTitle("Sign in")
+            .setPositiveButton("OK") { dialog, id ->
+               // val email = signinView.findViewById<EditText>(R.id.email).text
+               // val password = signinView.findViewById<EditText>(R.id.password).text
+               // println("Email: $email Password:$password")
+            }
+            .setNegativeButton("Cancel") { dialog, id ->
+
+            }
+
+         builder.create()
+        builder.show()
+        
+
+
+
+    /*
+        val builder = AlertDialog.Builder(this)
+        val inflater = this.layoutInflater
+        val signinView = inflater.inflate(R.layout.dialog, null)
+
+        builder.setView(signinView)
+            .setTitle("Sign in")
+            .setPositiveButton("OK") { dialog, id ->
+                //val email = signinView.findViewById<EditText>(R.id.email).text
+                //val password = signinView.findViewById<EditText>(R.id.password).text
+                //println("Email: $email Password:$password")
+            } .create()
+        builder.show()
+
+     */
+    }
+
+    //Version Dialog
     fun VersionDialog()
 {
     AlertDialog.Builder(this)
