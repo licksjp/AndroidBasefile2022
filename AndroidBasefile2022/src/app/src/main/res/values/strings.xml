@@ -16,7 +16,7 @@
     <string name="Setting_Vibration_List1">バイブオン</string>
     <string name="Setting_Vibration_List2">バイブオフ</string>
     <string name="OK">Ok</string>
-
+    <string name="Test">%s</string>
     <!--3.Help-->
     <string name="Help_NoSelect">ヘルプ\n1.バージョン\n2.参考文献\n\n\n\n\n\n番号:%d.無選択</string>
     <string name="Help_Select1">ヘルプ\n1.バージョン\n2.参考文献\n\n\n\n\n\n番号:%d.バージョン</string>

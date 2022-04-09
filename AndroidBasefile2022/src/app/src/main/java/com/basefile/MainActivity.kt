@@ -1,28 +1,48 @@
 package com.basefile
-
+//2022.04.10 バックアップ　ひな形アプリ
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.os.Vibrator
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.support.v4.app.*
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.ActionBar
+import androidx.fragment.app.DialogFragment
 import java.util.*
 
-class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
+
+class MainActivity() : AppCompatActivity(), TextToSpeech.OnInitListener, Parcelable {
     var No = 0
     var VIBRATION_ON = 1
-    var mode=0
-    var flag=0
-  //  private lateinit var mediaPlayer: MediaPlayer
- //   private val myContext: Context = context
+    var mode = 0
+    var flag = 0
+
+    //  private lateinit var mediaPlayer: MediaPlayer
+    //   private val myContext: Context = context
     private var textToSpeech: TextToSpeech? = null
     private val tts: TextToSpeech? = null
+
+    constructor(parcel: Parcel) : this() {
+        No = parcel.readInt()
+        VIBRATION_ON = parcel.readInt()
+        mode = parcel.readInt()
+        flag = parcel.readInt()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //setHasOptionsMenu(true)
         textToSpeech = TextToSpeech(this, this)
@@ -30,13 +50,13 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         setContentView(R.layout.activity_main)
         //val actionBar: ActionBar? = supportActionBar
         //if (actionBar != null) {
-          //  actionBar.setTitle("テキスト")
+        //  actionBar.setTitle("テキスト")
         //}
         var text = getString(R.string.Ready_Message)
         //SpeechText(getString("テスト".toString()))
         // ボタンを設定
         // ボタンを設定
-        var Screenview: TextView = findViewById<TextView>(R.id.view_screen) as TextView
+        var Screenview: TextView = findViewById(R.id.view_screen)
 
         val Button1: Button = findViewById(R.id.button_1)
         val Button2: Button = findViewById(R.id.button_2)
@@ -54,28 +74,27 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
 
         Button1.setOnClickListener {
             Vibration()
-            No=1
-            when(mode)
-            {
-                1->{
-                    flag=8
+            No = 1
+            when (mode) {
+                1 -> {
+                    flag = 8
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.TopMenu_Select1,No))
+                    messageView.text = (getString(R.string.TopMenu_Select1, No))
                 }
-                  4->{
-                    flag=4
+                4 -> {
+                    flag = 4
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.Help_Select1,No))
+                    messageView.text = (getString(R.string.Help_Select1, No))
                 }
-                5->{
-                    flag=7
+                5 -> {
+                    flag = 7
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.Setting_Select1,No))
+                    messageView.text = (getString(R.string.Setting_Select1, No))
 
                 }
-                6->{
-                    flag=8
-                    Input_moji()
+                6 -> {
+                    flag = 8
+                    //Input_moji()
                 }
 
                 // val messageView: TextView = findViewById(R.id.view_screen)
@@ -87,35 +106,35 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         }
         Button2.setOnClickListener {
             Vibration()
-            No=2
-            when(mode)
-            {
-                1->{
-                    flag=6
+            No = 2
+            when (mode) {
+                1 -> {
+                    flag = 6
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.TopMenu_Select2,No))
+                    messageView.text = (getString(R.string.TopMenu_Select2, No))
                 }
-                4->{
-                    flag=5
+                4 -> {
+                    flag = 5
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.Help_Select2,No))
+                    messageView.text = (getString(R.string.Help_Select2, No))
                 }
-                  // val messageView: TextView = findViewById(R.id.view_screen)
+                // val messageView: TextView = findViewById(R.id.view_screen)
                 // messageView.text = (getString(R.string.TopMenu_NoSelect))
                 // String.format(R.string.TopMenu_NoSelect,No)
 
             }
             //Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
+
+
         }
         Button3.setOnClickListener {
             Vibration()
-            No=3
-            when(mode)
-            {
-                1->{
-                    flag=3
+            No = 3
+            when (mode) {
+                1 -> {
+                    flag = 3
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.TopMenu_Select3,No))
+                    messageView.text = (getString(R.string.TopMenu_Select3, No))
                 }
 
                 // val messageView: TextView = findViewById(R.id.view_screen)
@@ -152,83 +171,83 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         }
         Button_Clear.setOnClickListener {
             Vibration()
-            flag=0
-            mode=0
-            No=0
+            flag = 0
+            mode = 0
+            No = 0
             val messageView: TextView = findViewById(R.id.view_screen)
             messageView.text = (getString(R.string.TopMessage))
 
-            Toast.makeText(this,R.string.AllClearMessage, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.AllClearMessage, Toast.LENGTH_SHORT).show()
         }
         Button_EXE.setOnClickListener {
             Vibration()
-            No=0
-            when(flag)
-            {
-                0->{
+            No = 0
+            /*トップ画面
+                          select3 Helpのコンテンツ Version Dialog
+                        */
+            when (flag) {
+                0 -> {
                     SpeechText("準備できました")
-                    mode=1
+                    mode = 1
                     val Screenview: TextView = findViewById(R.id.view_screen)
-                   // Screenview.setTextSize(8.0f)
-                    Screenview.text = (getString(R.string.TopMenu_NoSelect,No))
+                    // Screenview.setTextSize(8.0f)
+                    Screenview.text = (getString(R.string.TopMenu_NoSelect, No))
                 }
-                1->{
+                1 -> {
                     /*トップ画面
                        select1 トップ画面のコンテンツ
                      */
-                    mode=2
+                    mode = 2
                     val messageView: TextView = findViewById(R.id.view_screen)
                     //messageView.setTextSize(48.0f)
                     //messageView.setTextSize(32.0f)
-                    messageView.text = (getString(R.string.TopMenu_NoSelect,No))
+                    messageView.text = (getString(R.string.TopMenu_NoSelect, No))
 
                 }
-                    2->{
+                2 -> {
                     /*トップ画面
                        select2 設定のコンテンツ
                      */
-                    mode=3
+                    mode = 3
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.TopMenu_NoSelect,No))
+                    messageView.text = (getString(R.string.TopMenu_NoSelect, No))
 
                 }
-                3->{
+                3 -> {
                     /*トップ画面
                        select3 Helpのコンテンツ
                      */
-                    mode=4
+                    mode = 4
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.Help_NoSelect,No))
+                    messageView.text = (getString(R.string.Help_NoSelect, No))
 
                 }
-                4->{
-                    /*トップ画面
-                       select3 Helpのコンテンツ Version Dialog
-                     */
-                    VersionDialog()
+                4 -> {
+                     VersionDialog()
                 }
-                5->{
-                    ReferenceBookDialog()
+                5 -> {
+                     ReferenceBookDialog()
                 }
-                6->{
+                6 -> {
                     /*設定　トップ画面*/
-                    mode=5
+                    mode = 5
                     val messageView: TextView = findViewById(R.id.view_screen)
-                    messageView.text = (getString(R.string.Setting_NoSelect,No))
+                    messageView.text = (getString(R.string.Setting_NoSelect, No))
 
 
                 }
-                7->{
+                7 -> {
                     //バイブの設定　ダイアログ
-                    Setting_Vibration()
+
                 }
-                8->{
-                    //mode=6
+                8 -> {
+                    mode = 6
                     Input_moji()
+                    //alertDialogDemo()
                 }
                 // val messageView: TextView = findViewById(R.id.view_screen)
-                   // messageView.text = (getString(R.string.TopMenu_NoSelect))
-               // String.format(R.string.TopMenu_NoSelect,No)
+                // messageView.text = (getString(R.string.TopMenu_NoSelect))
+                // String.format(R.string.TopMenu_NoSelect,No)
 
             }
             //Toast.makeText(this, "テストメッセージです", Toast.LENGTH_SHORT).show()
@@ -241,23 +260,27 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
 
     }
 
+
     //verride fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-       // inflater.inflate(R.menu.sample_menu, menu)
+    // inflater.inflate(R.menu.sample_menu, menu)
     //}
 
-    fun Vibration() {
+    private fun Vibration() {
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.vibrate(200) // 200 ms
     }
+
     override fun onDestroy() {
         textToSpeech?.shutdown()
         super.onDestroy()
     }
+
     override fun onStop() {
         super.onStop()
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator.cancel()
     }
+
     /*mp3 再生*/
     /*
     fun playsound(BGM file)
@@ -285,52 +308,72 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     }
 
      */
-    override fun  onResume() {
+    override fun onResume() {
         super.onResume()
         //setVolumeControlStream(AudioManager.STREAM_MUSIC)
-       // var text = "テスト".text.toString()
+        // var text = "テスト".text.toString()
     }
+
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
-            Log.d("tts","TextToSpeech初期化成功")
-           // var text = getString(R.string.Ready_Message)
-           // SpeechText(text)
-            val listener = object : UtteranceProgressListener(){
-                var tag : String = "TTS"
+            Log.d("tts", "TextToSpeech初期化成功")
+            // var text = getString(R.string.Ready_Message)
+            // SpeechText(text)
+            val listener = object : UtteranceProgressListener() {
+                var tag: String = "TTS"
                 override fun onDone(utteranceId: String?) {
-                    Log.d(tag,"音声再生が完了しました。")
+                    Log.d(tag, "音声再生が完了しました。")
 
                 }
+
                 override fun onError(utteranceId: String?) {
-                    Log.d(tag,"音声再生中にエラーが発生しました。")
+                    Log.d(tag, "音声再生中にエラーが発生しました。")
                 }
+
                 override fun onError(utteranceId: String?, errorCode: Int) {
-                    Log.d(tag,"音声再生中にエラーが発生しました。")
+                    Log.d(tag, "音声再生中にエラーが発生しました。")
                 }
+
                 override fun onStart(utteranceId: String?) {
-                    Log.d(tag,"音声再生を開始します。")
+                    Log.d(tag, "音声再生を開始します。")
                 }
+
                 override fun onStop(utteranceId: String?, interrupted: Boolean) {
-                    Log.d(tag,"音声再生を中止します。")
+                    Log.d(tag, "音声再生を中止します。")
                 }
-                override fun onBeginSynthesis(utteranceId: String?, sampleRateInHz: Int, audioFormat: Int, channelCount: Int) {
-                    Log.d(tag,"音声の合成を開始します。")
+
+                override fun onBeginSynthesis(
+                    utteranceId: String?,
+                    sampleRateInHz: Int,
+                    audioFormat: Int,
+                    channelCount: Int
+                ) {
+                    Log.d(tag, "音声の合成を開始します。")
                 }
+
                 override fun onAudioAvailable(utteranceId: String?, audio: ByteArray?) {
-                    Log.d(tag,"音声が利用可能になりました。")
+                    Log.d(tag, "音声が利用可能になりました。")
                 }
             }
             // イベントリスナを登録
             tts?.setOnUtteranceProgressListener(listener)
-        }else{
-            Log.d("tts","TextToSpeech初期化失敗")
+        } else {
+            Log.d("tts", "TextToSpeech初期化失敗")
         }
     }
-    private fun SpeechText(text:String){
-        tts?.setLanguage(Locale.JAPANESE)
-        tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"ID")
+
+    fun customDialog() {
+        // customDialogFragmentを呼ぶ
+        val dialog = CustomDialog()
+        dialog.show(supportFragmentManager, "custom_dialog")
     }
-/*
+
+    private fun SpeechText(text: String) {
+        tts?.setLanguage(Locale.JAPANESE)
+        tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "ID")
+    }
+
+    /*
     private fun SpeechText(text:String){
         tts?.setLanguage(Locale.JAPANESE)
         tts?.speak(text,TextToSpeech.QUEUE_FLUSH,null,"ID")
@@ -341,83 +384,81 @@ class MainActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "utteranceId")
         }
     }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(No)
+        parcel.writeInt(VIBRATION_ON)
+        parcel.writeInt(mode)
+        parcel.writeInt(flag)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<MainActivity> {
+        override fun createFromParcel(parcel: Parcel): MainActivity {
+            return MainActivity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<MainActivity?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+
     //Edit Dialog
-    fun Input_moji() {
-        val builder = AlertDialog.Builder(this)
-        val inflater = this.layoutInflater
-        val signinView = inflater.inflate(R.layout.dialog, null)
-
-        builder.setView(signinView)
-            .setTitle("Sign in")
-            .setPositiveButton("OK") { dialog, id ->
-               // val email = signinView.findViewById<EditText>(R.id.email).text
-               // val password = signinView.findViewById<EditText>(R.id.password).text
-               // println("Email: $email Password:$password")
-            }
-            .setNegativeButton("Cancel") { dialog, id ->
-
-            }
-
-         builder.create()
-        builder.show()
-        
-
-
-
-    /*
-        val builder = AlertDialog.Builder(this)
-        val inflater = this.layoutInflater
-        val signinView = inflater.inflate(R.layout.dialog, null)
-
-        builder.setView(signinView)
-            .setTitle("Sign in")
-            .setPositiveButton("OK") { dialog, id ->
-                //val email = signinView.findViewById<EditText>(R.id.email).text
-                //val password = signinView.findViewById<EditText>(R.id.password).text
-                //println("Email: $email Password:$password")
-            } .create()
-        builder.show()
-
-     */
+    private fun Input_moji() {
+        customDialog()
     }
 
-    //Version Dialog
-    fun VersionDialog()
-{
-    AlertDialog.Builder(this)
-        .setTitle(R.string.VersionTitle)
-        .setMessage(R.string.VersionSentense)
-        .setPositiveButton(R.string.Ok) { dialog, which -> }
-        .show()
 
-
-    //return builder.create()
+    //
+//
+//
+// //参考文献
+    fun ReferenceBookDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.ReferenceBookTitle)
+            .setMessage(R.string.ReferenceBookSentense)
+            .setPositiveButton(R.string.Ok) { dialog, which -> }
+            .show()
+//
+//
+//return builder.create()
     }
-//参考文献
-fun ReferenceBookDialog()
-{
-    AlertDialog.Builder(this)
-        .setTitle(R.string.ReferenceBookTitle)
-        .setMessage(R.string.ReferenceBookSentense)
-        .setPositiveButton(R.string.Ok) { dialog, which -> }
-        .show()
+
+    //
+    fun  VersionDialog(){
+        AlertDialog.Builder(this)
+            .setTitle(R.string.VersionTitle)
+            .setMessage(R.string.VersionSentense)
+            .setPositiveButton(R.string.Ok) { dialog, which -> }
+            .show()
+    }
+// //設定　バイブのオンオフ 
+    fun Setting_Vibration() {
+
+        val strList = arrayOf(
+            getString(R.string.Setting_Vibration_List1), getString(R.string.Setting_Vibration_List2)
+        )
+
+        AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+            .setTitle(R.string.Setting_Vibration_Title)
+            .setSingleChoiceItems(strList, 0) { dialog_, _ ->
+                // TODO:アイテム選択時の挙動
+            }
+            .setPositiveButton(getString(R.string.Ok)) { dialog, which ->
+            }
+            .show()
 
 
-    //return builder.create()
+    }
 }
-//設定　バイブのオンオフ
-fun Setting_Vibration()
-{
-    val strList = arrayOf( getString(R.string.Setting_Vibration_List1), getString(R.string.Setting_Vibration_List2))
 
-    AlertDialog.Builder(this) // FragmentではActivityを取得して生成
-        .setTitle(R.string.Setting_Vibration_Title)
-        .setSingleChoiceItems(strList, 0, { dialog, which ->
-            // TODO:アイテム選択時の挙動
-        })
-        .setPositiveButton(getString(R.string.Ok), { dialog, which ->
-            // TODO:Yesが押された時の挙動
-        })
-        .show()
-}
-}
+
+
+
+
+
+
